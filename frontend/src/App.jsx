@@ -21,7 +21,8 @@ function App() {
   }, [])
   
   const connectWebSocket = () => {
-    wsRef.current = new WebSocket('ws://localhost:8000/transcribe')
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    wsRef.current = new WebSocket(`${protocol}//${window.location.host}/transcribe`)
     
     wsRef.current.onopen = () => {
       setWsStatus('Connected')
